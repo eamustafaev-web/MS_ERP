@@ -6,302 +6,86 @@
   <title>MW MMC — Tikinti və Əmlak ERP</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <script>
-    (function () {
-      try {
-        var t = JSON.parse(localStorage.getItem("mw-erp-theme") || "null");
-        if (!t) return;
-        var r = document.documentElement.style;
-        var fonts = {
-          Inter: '"Inter", "Segoe UI", sans-serif',
-          Roboto: '"Roboto", "Segoe UI", sans-serif',
-          Poppins: '"Poppins", "Segoe UI", sans-serif'
-        };
-        if (t.bgColor) r.setProperty("--app-bg", t.bgColor);
-        if (t.bgImage) r.setProperty("--app-bg-image", 'url("' + String(t.bgImage).replace(/["')]/g, "") + '")');
-        if (t.sidebarColor) r.setProperty("--sidebar-bg", t.sidebarColor);
-        if (t.font && fonts[t.font]) r.setProperty("--font-family", fonts[t.font]);
-      } catch (e) {}
-    })();
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3.0.0" />
 </head>
 <body>
-  <div class="app">
+  <div class="app-layout">
+    <!-- Sol Menyu (Sidebar) -->
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-mark">MW</div>
-        <div class="brand-text">
+        <div class="brand-logo">MW</div>
+        <div class="brand-info">
           <strong>MW MMC</strong>
           <span>Tikinti &amp; Əmlak ERP</span>
         </div>
       </div>
 
-      <nav class="nav" id="mainNav" aria-label="Qlobal modullar">
-        <button class="nav-item is-active" data-module="dashboard" type="button">
-          <span class="nav-icon" aria-hidden="true">▣</span>
-          <span>İdarə paneli</span>
+      <nav class="sidebar-nav" id="mainNav">
+        <button class="nav-btn" data-module="dashboard" type="button">
+          <span class="nav-icon">📊</span>
+          <span>İdarə Paneli</span>
         </button>
-        <button class="nav-item" data-module="projects" type="button">
-          <span class="nav-icon" aria-hidden="true">⬡</span>
-          <span>Tikinti layihələri</span>
+        <button class="nav-btn is-active" data-module="properties" type="button">
+          <span class="nav-icon">🏢</span>
+          <span>Obyektlər və Zəncir</span>
         </button>
-        <button class="nav-item" data-module="properties" type="button">
-          <span class="nav-icon" aria-hidden="true">⌂</span>
-          <span>Əmlak portfeli</span>
-        </button>
-        <button class="nav-item" data-module="contracts" type="button">
-          <span class="nav-icon" aria-hidden="true">☰</span>
+        <button class="nav-btn" data-module="contracts" type="button">
+          <span class="nav-icon">📝</span>
           <span>Müqavilələr</span>
         </button>
-        <button class="nav-item" data-module="finance" type="button">
-          <span class="nav-icon" aria-hidden="true">₮</span>
+        <button class="nav-btn" data-module="finance" type="button">
+          <span class="nav-icon">💰</span>
           <span>Maliyyə</span>
-        </button>
-        <button class="nav-item" data-module="warehouse" type="button">
-          <span class="nav-icon" aria-hidden="true">▣</span>
-          <span>Anbar və material</span>
-        </button>
-        <button class="nav-item" data-module="hr" type="button">
-          <span class="nav-icon" aria-hidden="true">☺</span>
-          <span>Kadrlar</span>
-        </button>
-        <button class="nav-item" data-module="partners" type="button">
-          <span class="nav-icon" aria-hidden="true">⇄</span>
-          <span>Tərəfdaşlar</span>
-        </button>
-        <button class="nav-item" data-module="reports" type="button">
-          <span class="nav-icon" aria-hidden="true">▤</span>
-          <span>Hesabatlar</span>
         </button>
       </nav>
 
-      <div class="sidebar-foot">
-        <p>HomiPay üslubu · tünd yaşıl / boz</p>
-        <p class="muted">MW MMC daxili sistem</p>
+      <div class="sidebar-footer">
+        <span class="status-indicator">● Sistem Aktivdir</span>
+        <small class="muted">Versiya 3.0 (Təmiz Baza)</small>
       </div>
     </aside>
 
-    <div class="shell">
+    <!-- Əsas İşçi Sahə (Main) -->
+    <div class="main-wrapper">
       <header class="topbar">
-        <button class="icon-btn menu-toggle" id="menuToggle" type="button" aria-label="Menyunu aç">☰</button>
-        <div class="page-meta">
-          <h1 id="pageTitle">İdarə paneli</h1>
-          <p id="pageSubtitle">Şirkət üzrə ümumi vəziyyət</p>
+        <div class="page-title">
+          <h1 id="pageTitle">Obyektlər və Zəncir</h1>
+          <p id="pageSubtitle">Obyektlərin idarə edilməsi və sənəd zənciri</p>
         </div>
-        <div class="topbar-actions">
-          <label class="search">
-            <span class="sr-only">Axtarış</span>
-            <input id="globalSearch" type="search" placeholder="Layihə, əmlak, müqavilə axtar..." />
-          </label>
-          <button class="icon-btn" type="button" title="Bildirişlər">🔔</button>
-          <div class="user-chip">
-            <span class="avatar">E</span>
+        <div class="topbar-right">
+          <div class="user-profile">
+            <span class="user-avatar">E</span>
             <div>
               <strong>Elnur</strong>
               <small>Administrator</small>
             </div>
           </div>
-          <button class="icon-btn" id="settingsToggle" type="button" title="Tənzimləmələr" aria-haspopup="dialog" aria-controls="settingsPanel" aria-expanded="false">⚙</button>
         </div>
       </header>
 
-      <main class="content" id="content">
-        <section class="module is-visible" id="module-dashboard" data-title="İdarə paneli" data-subtitle="Şirkət üzrə ümumi vəziyyət">
-          <div class="kpi-grid" id="kpiGrid"></div>
-          <div class="split">
-            <article class="card">
-              <header class="card-head">
-                <h2>Aktiv tikinti layihələri</h2>
-                <span class="badge">canlı</span>
-              </header>
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Layihə</th>
-                      <th>Obyekt</th>
-                      <th>Status</th>
-                      <th>İrəliləyiş</th>
-                    </tr>
-                  </thead>
-                  <tbody id="dashProjects"></tbody>
-                </table>
-              </div>
-            </article>
-            <article class="card">
-              <header class="card-head">
-                <h2>Əmlak dövriyyəsi</h2>
-              </header>
-              <ul class="feed" id="propertyFeed"></ul>
-            </article>
+      <main class="content-body" id="mainContent">
+        <!-- 1-ci Addım: Təmiz Başlanğıc Kartı -->
+        <div class="welcome-card card">
+          <div class="welcome-icon">✨</div>
+          <h2>Təməl Quruluş Hazırdır! (Addım 1)</h2>
+          <p>Layihə tam sıfırdan, ən təmiz arxitektura ilə yenidən quruldu. Artıq heç bir qarışıqlıq və ya artıq kod yoxdur.</p>
+          
+          <div class="step-status-box">
+            <span>Cari Vəziyyət:</span>
+            <strong>Addım 1: Baza Skelet və Sol Menyu quruldu ✓</strong>
           </div>
-        </section>
 
-        <section class="module" id="module-projects" data-title="Tikinti layihələri" data-subtitle="Sahə, mərhələ və podratçı nəzarəti">
-          <div class="toolbar">
-            <button class="btn primary" type="button" data-action="add-project">+ Yeni layihə</button>
-          </div>
-          <article class="card">
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Kod</th>
-                    <th>Ad</th>
-                    <th>Ünvan</th>
-                    <th>Büdcə</th>
-                    <th>Status</th>
-                    <th>İrəliləyiş</th>
-                  </tr>
-                </thead>
-                <tbody id="projectsTable"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
-
-        <section class="module" id="module-properties" data-title="Əmlak portfeli" data-subtitle="Satış, icarə və inventar">
-          <div class="cards-grid" id="propertyCards"></div>
-        </section>
-
-        <section class="module" id="module-contracts" data-title="Müqavilələr" data-subtitle="Alqı-satqı, icarə və podrat">
-          <article class="card">
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>№</th>
-                    <th>Tərəf</th>
-                    <th>Növ</th>
-                    <th>Məbləğ</th>
-                    <th>Müddət</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody id="contractsTable"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
-
-        <section class="module" id="module-finance" data-title="Maliyyə" data-subtitle="Kassa, ödəniş və xərc">
-          <div class="kpi-grid compact" id="financeKpis"></div>
-          <article class="card">
-            <header class="card-head"><h2>Son əməliyyatlar</h2></header>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Tarix</th>
-                    <th>Təsvir</th>
-                    <th>Hesab</th>
-                    <th>Məbləğ</th>
-                  </tr>
-                </thead>
-                <tbody id="financeTable"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
-
-        <section class="module" id="module-warehouse" data-title="Anbar və material" data-subtitle="Ehtiyat, qəbul və silinmə">
-          <article class="card">
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>SKU</th>
-                    <th>Material</th>
-                    <th>Anbar</th>
-                    <th>Miqdar</th>
-                    <th>Vahid</th>
-                    <th>Min. ehtiyat</th>
-                  </tr>
-                </thead>
-                <tbody id="warehouseTable"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
-
-        <section class="module" id="module-hr" data-title="Kadrlar" data-subtitle="İşçi heyəti və vəzifələr">
-          <div class="cards-grid" id="hrCards"></div>
-        </section>
-
-        <section class="module" id="module-partners" data-title="Tərəfdaşlar" data-subtitle="Podratçı, təchizatçı və müştəri">
-          <article class="card">
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Ad</th>
-                    <th>Kateqoriya</th>
-                    <th>Əlaqə</th>
-                    <th>Layihə</th>
-                    <th>Reytinq</th>
-                  </tr>
-                </thead>
-                <tbody id="partnersTable"></tbody>
-              </table>
-            </div>
-          </article>
-        </section>
-
-        <section class="module" id="module-reports" data-title="Hesabatlar" data-subtitle="İcra, maliyyə və əmlak analitika">
-          <div class="report-grid" id="reportGrid"></div>
-        </section>
+          <p class="hint-text">
+            Zəhmət olmasa brauzeri yeniləyib (<code>F5</code>) bu təmiz ilkin görünüşə baxın. 
+            Bəyəndiyiniz halda bildirin, birbaşa <strong>2-ci addıma</strong> (məsələn: binalar və mərtəbələr ağacı) keçək!
+          </p>
+        </div>
       </main>
     </div>
   </div>
 
-  <div class="settings-backdrop" id="settingsBackdrop" hidden></div>
-  <aside class="settings-panel" id="settingsPanel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true">
-    <header class="settings-head">
-      <div>
-        <h2 id="settingsTitle">Tənzimləmələr</h2>
-        <p>Görünüşü özünüzə uyğunlaşdırın</p>
-      </div>
-      <button class="icon-btn" id="settingsClose" type="button" aria-label="Bağla">✕</button>
-    </header>
-    <form class="settings-form" id="settingsForm">
-      <fieldset>
-        <legend>Ümumi arxa fon</legend>
-        <label class="field">
-          <span>Rəng</span>
-          <input id="bgColor" type="color" value="#d7ddd9" />
-        </label>
-        <label class="field">
-          <span>Şəkil linki (URL)</span>
-          <input id="bgImage" type="url" placeholder="https://..." />
-        </label>
-        <button class="btn ghost" id="clearBgImage" type="button">Şəkli təmizlə</button>
-      </fieldset>
-      <fieldset>
-        <legend>Sol menyu</legend>
-        <label class="field">
-          <span>Sidebar rəngi</span>
-          <input id="sidebarColor" type="color" value="#0c2f24" />
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Şrift</legend>
-        <label class="field">
-          <span>Sistem şrifti</span>
-          <select id="fontFamily">
-            <option value="Inter">Inter</option>
-            <option value="Roboto">Roboto</option>
-            <option value="Poppins">Poppins</option>
-          </select>
-        </label>
-      </fieldset>
-      <div class="settings-actions">
-        <button class="btn ghost" id="resetTheme" type="button">Standarta qayıt</button>
-      </div>
-    </form>
-  </aside>
   <div class="toast" id="toast" hidden></div>
-  <script src="app.js"></script>
+  <script src="app.js?v=3.0.0"></script>
 </body>
 </html>
