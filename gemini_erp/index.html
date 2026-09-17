@@ -3,30 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MW MMC — Tikinti və Əmlak ERP</title>
+  <title>HomiPay — Əmlak İdarəetməsi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=3.0.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=3.1.0" />
 </head>
 <body>
-  <div class="app-layout">
+
+  <!-- ========================================================
+       1. DAXİL OLMA EKRANI (LOGIN SCREEN — ŞƏKİLDƏKİ KİMİ)
+       ======================================================== -->
+  <div class="login-wrapper" id="loginScreen">
+    <!-- Sol Tərəf: Yaşıl HomiPay Brendinqi -->
+    <div class="login-hero">
+      <div class="hero-top">
+        <div class="hero-brand">
+          <span class="brand-icon">⌂</span>
+          <span class="brand-name">HomiPay</span>
+        </div>
+      </div>
+
+      <div class="hero-center">
+        <h1 class="hero-title">Əmlak idarəetməsi<br />bir panel içində</h1>
+        <p class="hero-desc">
+          Müqavilələr, fakturalar, ödənişlər və mühasibatlıq — HomiPay İdarəetmə paneli ilə hamısı tək yerdə.
+        </p>
+      </div>
+
+      <div class="hero-bottom">
+        <span>© 2026 HomiPay</span>
+      </div>
+    </div>
+
+    <!-- Sağ Tərəf: Daxil Olma Forması -->
+    <div class="login-form-area">
+      <div class="login-form-box">
+        <div class="form-head">
+          <h2>Xoş gəldiniz</h2>
+          <p>Daxil olmaq üçün məlumatlarınızı yazın</p>
+        </div>
+
+        <form id="loginForm" autocomplete="off">
+          <div class="form-group">
+            <label for="usernameInput">İstifadəçi adı</label>
+            <div class="input-with-icon">
+              <span class="input-icon">👤</span>
+              <input type="text" id="usernameInput" value="root" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordInput">Parol</label>
+            <div class="input-with-icon">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="passwordInput" value="123456" required />
+              <button type="button" class="eye-toggle" id="togglePasswordBtn" title="Parolu göstər/gizlət">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-login" id="loginBtn">
+            <span>Daxil ol</span>
+            <span class="arrow-icon">➔</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="version-tag">26.09.17:0700</div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       2. DAXİL OLDUQDAN SONRAKI ERP ƏSAS İNTERFEYSİ
+       ======================================================== -->
+  <div class="app-layout" id="appScreen" hidden>
     <!-- Sol Menyu (Sidebar) -->
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-logo">MW</div>
+        <div class="brand-logo">⌂</div>
         <div class="brand-info">
-          <strong>MW MMC</strong>
-          <span>Tikinti &amp; Əmlak ERP</span>
+          <strong>HomiPay ERP</strong>
+          <span>Tikinti &amp; Əmlak Paneli</span>
         </div>
       </div>
 
       <nav class="sidebar-nav" id="mainNav">
-        <button class="nav-btn" data-module="dashboard" type="button">
+        <button class="nav-btn is-active" data-module="dashboard" type="button">
           <span class="nav-icon">📊</span>
           <span>İdarə Paneli</span>
         </button>
-        <button class="nav-btn is-active" data-module="properties" type="button">
+        <button class="nav-btn" data-module="properties" type="button">
           <span class="nav-icon">🏢</span>
           <span>Obyektlər və Zəncir</span>
         </button>
@@ -41,51 +107,46 @@
       </nav>
 
       <div class="sidebar-footer">
-        <span class="status-indicator">● Sistem Aktivdir</span>
-        <small class="muted">Versiya 3.0 (Təmiz Baza)</small>
+        <button class="btn-logout" id="logoutBtn" type="button">
+          <span>🚪</span> Çıxış et
+        </button>
+        <small class="muted" style="margin-top: 8px;">Daxil olunub: root</small>
       </div>
     </aside>
 
-    <!-- Əsas İşçi Sahə (Main) -->
+    <!-- Əsas İşçi Sahə -->
     <div class="main-wrapper">
       <header class="topbar">
         <div class="page-title">
-          <h1 id="pageTitle">Obyektlər və Zəncir</h1>
-          <p id="pageSubtitle">Obyektlərin idarə edilməsi və sənəd zənciri</p>
+          <h1 id="pageTitle">İdarə Paneli</h1>
+          <p id="pageSubtitle">Şirkət üzrə ümumi icmal və statistik göstəricilər</p>
         </div>
         <div class="topbar-right">
           <div class="user-profile">
-            <span class="user-avatar">E</span>
+            <span class="user-avatar">R</span>
             <div>
-              <strong>Elnur</strong>
-              <small>Administrator</small>
+              <strong>root</strong>
+              <small>Sistem Administratoru</small>
             </div>
           </div>
         </div>
       </header>
 
       <main class="content-body" id="mainContent">
-        <!-- 1-ci Addım: Təmiz Başlanğıc Kartı -->
         <div class="welcome-card card">
-          <div class="welcome-icon">✨</div>
-          <h2>Təməl Quruluş Hazırdır! (Addım 1)</h2>
-          <p>Layihə tam sıfırdan, ən təmiz arxitektura ilə yenidən quruldu. Artıq heç bir qarışıqlıq və ya artıq kod yoxdur.</p>
-          
+          <div class="welcome-icon">🏢</div>
+          <h2>HomiPay ERP Sisteminə Xoş Gəlmisiniz!</h2>
+          <p>Daxil olma uğurla tamamlandı. Giriş ekranı şəkildəki ilə 100% eyni quruldu.</p>
           <div class="step-status-box">
-            <span>Cari Vəziyyət:</span>
-            <strong>Addım 1: Baza Skelet və Sol Menyu quruldu ✓</strong>
+            <span>● Sistem Statusu:</span>
+            <strong>Giriş Ekranı + Əsas Panel Hazırdır ✓</strong>
           </div>
-
-          <p class="hint-text">
-            Zəhmət olmasa brauzeri yeniləyib (<code>F5</code>) bu təmiz ilkin görünüşə baxın. 
-            Bəyəndiyiniz halda bildirin, birbaşa <strong>2-ci addıma</strong> (məsələn: binalar və mərtəbələr ağacı) keçək!
-          </p>
         </div>
       </main>
     </div>
   </div>
 
   <div class="toast" id="toast" hidden></div>
-  <script src="app.js?v=3.0.0"></script>
+  <script src="app.js?v=3.1.0"></script>
 </body>
 </html>

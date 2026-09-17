@@ -1,22 +1,15 @@
 /* ==========================================================================
-   MW MMC — TƏMİZ VƏ MÜASİR ERP BAZA STİLLƏRİ (v3.0)
+   HOMIPAY — DİZAYN VƏ LOGIN SİSTEMİ (ŞƏKİLLƏ 100% EYNİ)
    ========================================================================== */
 
 :root {
-  --bg-app: #f3f6f4;
-  --bg-sidebar: #0b261e;
-  --bg-sidebar-hover: #133a2f;
-  --bg-sidebar-active: #1a4d3e;
-  --bg-card: #ffffff;
-  --primary: #217346;
-  --primary-light: #eaf5ef;
-  --text-main: #14201b;
-  --text-muted: #6b7a73;
-  --text-on-dark: #ecf3ef;
-  --border: #e1e7e3;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 4px 18px rgba(11, 38, 30, 0.06);
+  --green-main: #1c7e48;
+  --green-hover: #156639;
+  --green-dark: #0f4627;
+  --input-bg: #ebf3fe; /* Şəkildəki xarakterik açıq mavi-boz ton */
+  --input-border: #dbe4f0;
+  --text-dark: #121c17;
+  --text-muted: #788780;
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -30,25 +23,238 @@ html,
 body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  min-height: 100vh;
   font-family: var(--font-family);
-  color: var(--text-main);
-  background-color: var(--bg-app);
+  color: var(--text-dark);
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ==========================================
+   1. LOGIN WRAPPER & SPLIT LAYOUT
+   ========================================== */
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 68% 32%;
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* SOL TƏRƏF (YAŞIL HEROFRAME) */
+.login-hero {
+  position: relative;
+  background-color: var(--green-main);
+  background-image: 
+    radial-gradient(circle at 10% 12%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 22%, transparent 23%),
+    radial-gradient(circle at 68% 90%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 24%, transparent 25%);
+  color: #ffffff;
+  padding: 44px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Brend Loqo (⌂ HomiPay) */
+.hero-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 8px 18px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+}
+
+.brand-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+/* Mərkəzi Şüar */
+.hero-center {
+  max-width: 540px;
+  margin: auto 0;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+  color: #ffffff;
+}
+
+.hero-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+}
+
+/* Alt Müəlliflik Hüququ */
+.hero-bottom {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* SAĞ TƏRƏF (AĞ LOGIN FORMASI) */
+.login-form-area {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 48px;
+  position: relative;
+}
+
+.login-form-box {
+  width: 100%;
+  max-width: 330px;
+}
+
+.form-head {
+  margin-bottom: 28px;
+}
+
+.form-head h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: #14201a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.form-head p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* FORM SAHƏLƏRİ */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5952;
+  margin-bottom: 7px;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 12px;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.input-with-icon:focus-within {
+  border-color: var(--green-main);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(28, 126, 72, 0.12);
+}
+
+.input-icon {
+  font-size: 14px;
+  color: #7b8e85;
+  user-select: none;
+}
+
+.input-with-icon input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a2922;
+}
+
+.eye-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  opacity: 0.65;
+  transition: opacity 0.15s;
+}
+
+.eye-toggle:hover {
+  opacity: 1;
+}
+
+/* DAXİL OL DÜYMƏSİ */
+.btn-login {
+  width: 100%;
+  height: 46px;
+  background: var(--green-main);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(28, 126, 72, 0.32);
+  transition: all 0.18s ease;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(28, 126, 72, 0.4);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+}
+
+.version-tag {
+  position: absolute;
+  bottom: 16px;
+  right: 20px;
+  font-size: 11px;
+  color: #9eb0a7;
+  font-family: monospace;
+}
+
+/* ==========================================
+   2. ERP ƏSAS LAYOUT (DAXİL OLDUQDAN SONRA)
+   ========================================== */
 .app-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
+  background-color: #f3f6f4;
 }
 
-/* ==========================================
-   SIDEBAR (SOL MENYU)
-   ========================================== */
 .sidebar {
-  background: var(--bg-sidebar);
-  color: var(--text-on-dark);
+  background: #0b261e;
+  color: #ecf3ef;
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
@@ -56,40 +262,35 @@ body {
   position: sticky;
   top: 0;
   height: 100vh;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.brand {
+.sidebar .brand {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 4px 8px;
 }
 
-.brand-logo {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #2f8a5b, #134635);
+.sidebar .brand-logo {
+  width: 38px;
+  height: 38px;
+  background: var(--green-main);
   border-radius: 10px;
   display: grid;
   place-items: center;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.05em;
+  font-size: 18px;
   color: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
-.brand-info strong {
+.sidebar .brand-info strong {
   display: block;
   font-size: 15px;
-  letter-spacing: 0.02em;
 }
 
-.brand-info span {
+.sidebar .brand-info span {
   display: block;
   font-size: 11.5px;
-  color: #9ab3a7;
+  color: #8da69a;
 }
 
 .sidebar-nav {
@@ -105,7 +306,7 @@ body {
   gap: 12px;
   width: 100%;
   padding: 11px 14px;
-  border-radius: var(--radius-sm);
+  border-radius: 8px;
   border: none;
   background: transparent;
   color: #c2d6cc;
@@ -114,47 +315,49 @@ body {
   font-family: inherit;
   cursor: pointer;
   text-align: left;
-  transition: all 0.15s ease;
+  transition: all 0.15s;
 }
 
 .nav-btn:hover {
-  background: var(--bg-sidebar-hover);
+  background: #133a2f;
   color: #ffffff;
 }
 
 .nav-btn.is-active {
-  background: var(--bg-sidebar-active);
+  background: #1a4d3e;
   color: #ffffff;
   font-weight: 600;
   box-shadow: inset 3px 0 0 #7dcca4;
 }
 
-.nav-icon {
-  font-size: 16px;
-}
-
 .sidebar-footer {
   padding: 12px 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
 }
 
-.status-indicator {
-  font-size: 12px;
-  color: #7dcca4;
+.btn-logout {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: #ff9b9b;
+  font-family: inherit;
+  font-size: 12.5px;
   font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s;
 }
 
-.muted {
-  color: #8da69a;
-  font-size: 11.5px;
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.18);
+  color: #ffffff;
 }
 
-/* ==========================================
-   MAIN WORKSPACE & TOPBAR
-   ========================================== */
 .main-wrapper {
   display: flex;
   flex-direction: column;
@@ -163,7 +366,7 @@ body {
 
 .topbar {
   background: #ffffff;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #e1e7e3;
   padding: 16px 28px;
   display: flex;
   align-items: center;
@@ -177,19 +380,13 @@ body {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-main);
+  color: #14201b;
 }
 
 .page-title p {
   margin: 2px 0 0 0;
   font-size: 12.5px;
-  color: var(--text-muted);
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  color: #6b7a73;
 }
 
 .user-profile {
@@ -202,12 +399,12 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--primary-light);
-  color: var(--primary);
+  background: #eaf5ef;
+  color: var(--green-main);
   display: grid;
   place-items: center;
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 800;
+  font-size: 14px;
 }
 
 .user-profile strong {
@@ -218,46 +415,42 @@ body {
 
 .user-profile small {
   font-size: 11px;
-  color: var(--text-muted);
+  color: #6b7a73;
 }
 
-/* ==========================================
-   CONTENT BODY & CARDS
-   ========================================== */
 .content-body {
   padding: 28px;
   flex: 1;
 }
 
 .card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: #ffffff;
+  border: 1px solid #e1e7e3;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(11, 38, 30, 0.05);
 }
 
-/* WELCOME CARD (STEP 1) */
 .welcome-card {
   padding: 36px;
-  max-width: 680px;
+  max-width: 640px;
   text-align: center;
   margin: 30px auto;
 }
 
 .welcome-icon {
-  font-size: 40px;
+  font-size: 44px;
   margin-bottom: 12px;
 }
 
 .welcome-card h2 {
   font-size: 22px;
   margin: 0 0 10px 0;
-  color: var(--primary);
+  color: var(--green-main);
 }
 
 .welcome-card p {
   font-size: 14px;
-  color: var(--text-muted);
+  color: #6b7a73;
   line-height: 1.6;
   margin: 0 0 20px 0;
 }
@@ -266,21 +459,12 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--primary-light);
-  border: 1px solid rgba(33, 115, 70, 0.2);
+  background: #eaf5ef;
+  border: 1px solid rgba(28, 126, 72, 0.2);
   padding: 10px 18px;
   border-radius: 24px;
-  font-size: 13.5px;
-  color: var(--primary);
-  margin-bottom: 20px;
-}
-
-.hint-text {
-  font-size: 13px !important;
-  background: #f8faf9;
-  border-radius: 8px;
-  padding: 12px;
-  color: var(--text-main) !important;
+  font-size: 13px;
+  color: var(--green-main);
 }
 
 /* TOAST */
@@ -297,12 +481,19 @@ body {
   z-index: 1000;
 }
 
-@media (max-width: 768px) {
-  .app-layout {
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .login-wrapper {
     grid-template-columns: 1fr;
   }
-  .sidebar {
-    height: auto;
-    position: static;
+  .login-hero {
+    padding: 32px 24px;
+    min-height: 320px;
+  }
+  .hero-title {
+    font-size: 28px;
+  }
+  .app-layout {
+    grid-template-columns: 1fr;
   }
 }

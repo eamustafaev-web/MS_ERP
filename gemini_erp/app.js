@@ -1,15 +1,65 @@
 /* ==========================================================================
-   MW MMC — ERP TƏMİZ JAVASCRIPT BAZASI (v3.0)
+   HOMIPAY — JAVASCRIPT BAZASI VƏ DAXİL OLMA İDARƏETMƏSİ
    ========================================================================== */
 
 // DOM Elementləri
+const loginScreen = document.getElementById("loginScreen");
+const appScreen = document.getElementById("appScreen");
+const loginForm = document.getElementById("loginForm");
+const passwordInput = document.getElementById("passwordInput");
+const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+const logoutBtn = document.getElementById("logoutBtn");
+
 const pageTitle = document.getElementById("pageTitle");
 const pageSubtitle = document.getElementById("pageSubtitle");
 const mainNav = document.getElementById("mainNav");
 const mainContent = document.getElementById("mainContent");
 const toast = document.getElementById("toast");
 
-// Sadə modullar konfiqurasiyası
+// Toast bildirişi
+function showToast(message) {
+  if (!toast) return;
+  toast.hidden = false;
+  toast.textContent = message;
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.hidden = true;
+  }, 2200);
+}
+
+// 1. Parolun görünməsini dəyişmək (Göz ikonu)
+togglePasswordBtn?.addEventListener("click", () => {
+  const isPassword = passwordInput.type === "password";
+  passwordInput.type = isPassword ? "text" : "password";
+  togglePasswordBtn.textContent = isPassword ? "🙈" : "👁️";
+});
+
+// 2. Daxil olma (Login Submit)
+loginForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const user = document.getElementById("usernameInput").value.trim();
+  const pass = passwordInput.value;
+
+  if (!user || !pass) {
+    showToast("Zəhmət olmasa istifadəçi adı və parolu daxil edin.");
+    return;
+  }
+
+  // Giriş uğurludur
+  loginScreen.hidden = true;
+  appScreen.hidden = false;
+  showToast(`Xoş gəldiniz, ${user}!`);
+});
+
+// 3. Çıxış etmə (Logout)
+logoutBtn?.addEventListener("click", () => {
+  appScreen.hidden = true;
+  loginScreen.hidden = false;
+  showToast("Sistemdən çıxış edildi.");
+});
+
+// 4. Modullar arası naviqasiya
 const modules = {
   dashboard: {
     title: "İdarə Paneli",
@@ -29,67 +79,34 @@ const modules = {
   }
 };
 
-// Toast bildirişi
-function showToast(message) {
-  if (!toast) return;
-  toast.hidden = false;
-  toast.textContent = message;
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => {
-    toast.hidden = true;
-  }, 2200);
-}
-
-// Modula keçid funksiyası
 function switchModule(moduleId) {
   const mod = modules[moduleId];
   if (!mod) return;
 
-  // Başlıqları yenilə
   pageTitle.textContent = mod.title;
   pageSubtitle.textContent = mod.subtitle;
 
-  // Düymə aktivliyini yenilə
   document.querySelectorAll(".nav-btn").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.module === moduleId);
   });
 
-  // Əgər Obyektlər moduludursa, baza məlumatı göstər
-  if (moduleId === "properties") {
-    mainContent.innerHTML = `
-      <div class="welcome-card card">
-        <div class="welcome-icon">🏢</div>
-        <h2>Obyektlər və Zəncir Modulu (Addım 1)</h2>
-        <p>Baza naviqasiya işləkdir. Növbəti addımda bu sahəyə <strong>Binaların Qovluq Ağacı</strong> və ya <strong>Cədvəl</strong> əlavə edəcəyik.</p>
-        <div class="step-status-box">
-          <span>Hazırki Addım:</span>
-          <strong>1-ci Addım təsdiqini gözləyir</strong>
-        </div>
+  mainContent.innerHTML = `
+    <div class="welcome-card card">
+      <div class="welcome-icon">🏢</div>
+      <h2>${mod.title}</h2>
+      <p>${mod.subtitle}</p>
+      <div class="step-status-box">
+        <span>● Bölmə:</span>
+        <strong>${mod.title} aktivdir</strong>
       </div>
-    `;
-  } else {
-    mainContent.innerHTML = `
-      <div class="welcome-card card">
-        <div class="welcome-icon">📊</div>
-        <h2>${mod.title}</h2>
-        <p>${mod.subtitle}</p>
-        <div class="step-status-box">
-          <span>Status:</span>
-          <strong>Bu modul növbəti mərhələlərdə doldurulacaq</strong>
-        </div>
-      </div>
-    `;
-  }
+    </div>
+  `;
 
-  showToast(`${mod.title} bölməsinə keçid edildi.`);
+  showToast(`${mod.title} bölməsinə keçildi.`);
 }
 
-// Naviqasiya klikləri
-mainNav.addEventListener("click", (event) => {
+mainNav?.addEventListener("click", (event) => {
   const btn = event.target.closest("[data-module]");
   if (!btn) return;
   switchModule(btn.dataset.module);
 });
-
-// Konsolda status
-console.log("MW ERP v3.0 baza təmiz şəkildə işə salındı.");
