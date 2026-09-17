@@ -1,5 +1,5 @@
 /* ==========================================================================
-   HOMIPAY — JAVASCRIPT BAZASI VƏ DAXİL OLMA İDARƏETMƏSİ
+   PAYHOME — JAVASCRIPT BAZASI VƏ DAXİL OLMA İDARƏETMƏSİ
    ========================================================================== */
 
 // DOM Elementləri
