@@ -14,7 +14,7 @@
   <!-- ========================================================
        1. DAXİL OLMA EKRANI (LOGIN SCREEN — ŞƏKİLDƏKİ KİMİ)
        ======================================================== -->
-  <div class="login-wrapper" id="loginScreen">
+  <div class="login-wrapper" id="loginScreen" hidden>
     <!-- Sol Tərəf: Yaşıl PayHome Brendinqi -->
     <div class="login-hero">
       <div class="hero-top">
@@ -57,7 +57,7 @@
             <label for="passwordInput">Parol</label>
             <div class="input-with-icon">
               <span class="input-icon">🔒</span>
-              <input type="password" id="passwordInput" value="123456" required />
+              <input type="password" id="passwordInput" value="090809" required />
               <button type="button" class="eye-toggle" id="togglePasswordBtn" title="Parolu göstər/gizlət">👁️</button>
             </div>
           </div>
@@ -76,7 +76,7 @@
   <!-- ========================================================
        2. DAXİL OLDUQDAN SONRAKI ERP ƏSAS İNTERFEYSİ
        ======================================================== -->
-  <div class="app-layout" id="appScreen" hidden>
+  <div class="app-layout" id="appScreen">
     <!-- Sol Menyu (Sidebar) -->
     <aside class="sidebar" id="sidebar">
       <div class="brand">
@@ -133,13 +133,106 @@
       </header>
 
       <main class="content-body" id="mainContent">
-        <div class="welcome-card card">
-          <div class="welcome-icon">🏢</div>
-          <h2>PayHome ERP Sisteminə Xoş Gəlmisiniz!</h2>
-          <p>Daxil olma uğurla tamamlandı. Giriş ekranı şəkildəki ilə 100% eyni quruldu.</p>
-          <div class="step-status-box">
-            <span>● Sistem Statusu:</span>
-            <strong>Giriş Ekranı + Əsas Panel Hazırdır ✓</strong>
+        <!-- 4 Əsas Göstərici Kartı -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon">🏢</div>
+            <div class="stat-info">
+              <span class="stat-label">Ümumi Obyektlər</span>
+              <span class="stat-value">148</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📝</div>
+            <div class="stat-info">
+              <span class="stat-label">Aktiv Müqavilələr</span>
+              <span class="stat-value">94</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <span class="stat-label">Aylıq Dövriyyə</span>
+              <span class="stat-value">124,500 ₼</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <span class="stat-label">Gözləyən Ödənişlər</span>
+              <span class="stat-value">18,200 ₼</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Əsas Bölmələr: Cədvəl və Məlumatlar -->
+        <div class="dashboard-sections">
+          <div class="table-card">
+            <div class="table-card-head">
+              <h3>Son Müqavilələr və Əməliyyatlar</h3>
+              <span class="badge badge-active">Canlı Məlumat</span>
+            </div>
+            <table class="erp-table">
+              <thead>
+                <tr>
+                  <th>Müqavilə №</th>
+                  <th>Obyekt / Sahə</th>
+                  <th>Müştəri</th>
+                  <th>Məbləğ</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#PH-2026-081</strong></td>
+                  <td>Bina A, Mənzil 42</td>
+                  <td>Əli Məmmədov</td>
+                  <td>85,000 ₼</td>
+                  <td><span class="badge badge-active">Aktiv</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#PH-2026-080</strong></td>
+                  <td>Bina B, Obyekt 3 (Qeyri-yaşayış)</td>
+                  <td>Rəşad Quliyev</td>
+                  <td>142,000 ₼</td>
+                  <td><span class="badge badge-active">Aktiv</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#PH-2026-079</strong></td>
+                  <td>Bina C, Mənzil 108</td>
+                  <td>Nigar Həsənova</td>
+                  <td>67,500 ₼</td>
+                  <td><span class="badge badge-pending">Gözləmədə</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#PH-2026-078</strong></td>
+                  <td>Bina A, Mənzil 15</td>
+                  <td>Samir Əliyev</td>
+                  <td>92,000 ₼</td>
+                  <td><span class="badge badge-active">Aktiv</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-card">
+            <div class="table-card-head">
+              <h3>Sürətli Bildirişlər</h3>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
+              <div style="padding: 10px 12px; background: #f8faf9; border-radius: 8px; border-left: 3px solid var(--green-main);">
+                <strong>Yeni Müqavilə:</strong> #PH-2026-081 təsdiqləndi.
+                <div style="font-size: 11px; color: #788780; margin-top: 4px;">12 dəqiqə əvvəl</div>
+              </div>
+              <div style="padding: 10px 12px; background: #fffdf5; border-radius: 8px; border-left: 3px solid #d97706;">
+                <strong>Ödəniş Xatırlatması:</strong> 3 müqavilə üzrə qrafik yaxınlaşır.
+                <div style="font-size: 11px; color: #788780; margin-top: 4px;">1 saat əvvəl</div>
+              </div>
+              <div style="padding: 10px 12px; background: #f8faf9; border-radius: 8px; border-left: 3px solid var(--green-main);">
+                <strong>Kassa Qalıqı:</strong> Günlük kassa hesabatı yeniləndi.
+                <div style="font-size: 11px; color: #788780; margin-top: 4px;">Bugün, 09:30</div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
