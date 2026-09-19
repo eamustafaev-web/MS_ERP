@@ -77,6 +77,10 @@ const modules = {
     title: "İdarə Paneli",
     subtitle: "Şirkət üzrə ümumi icmal və statistik göstəricilər"
   },
+  registry: {
+    title: "Ümumi Reyestr",
+    subtitle: "Müştərilər, mülkiyyətçilər və tərəfdaşların ümumi reyestri"
+  },
   properties: {
     title: "Obyektlər və Zəncir",
     subtitle: "Obyektlərin idarə edilməsi və sənəd zənciri"
