@@ -34,6 +34,12 @@ togglePasswordBtn?.addEventListener("click", () => {
   togglePasswordBtn.textContent = isPassword ? "🙈" : "👁️";
 });
 
+// Əvvəlcədən daxil olubsa, birbaşa ERP-ni göstər
+if (sessionStorage.getItem("payhome_auth") === "true") {
+  loginScreen.hidden = true;
+  appScreen.hidden = false;
+}
+
 // 2. Daxil olma (Login Submit)
 loginForm?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -46,14 +52,20 @@ loginForm?.addEventListener("submit", (e) => {
     return;
   }
 
-  // Giriş uğurludur
-  loginScreen.hidden = true;
-  appScreen.hidden = false;
-  showToast(`Xoş gəldiniz, ${user}!`);
+  // Tələb olunan istifadəçi və parol yoxlanışı
+  if (user === "root" && pass === "090809") {
+    loginScreen.hidden = true;
+    appScreen.hidden = false;
+    sessionStorage.setItem("payhome_auth", "true");
+    showToast(`Xoş gəldiniz, ${user}!`);
+  } else {
+    showToast("İstifadəçi adı və ya parol yanlışdır!");
+  }
 });
 
 // 3. Çıxış etmə (Logout)
 logoutBtn?.addEventListener("click", () => {
+  sessionStorage.removeItem("payhome_auth");
   appScreen.hidden = true;
   loginScreen.hidden = false;
   showToast("Sistemdən çıxış edildi.");
